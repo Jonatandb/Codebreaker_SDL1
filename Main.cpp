@@ -1,13 +1,6 @@
 // Jonatandb@gmail.com
 //
-// PENDIENTES:
-//				-	Si pierdo y pongo salir y luego no salir aparece comnenzar nuevo pero continuo en mismo nivel...
-//				-	Habilitar tecla secreta...
-//				-	Solucionar problemas de referencias con el linker al intentar utilizar el Logger::Log...
-//
-//				-	LISTO		Hacer los colores globales para poder usarlos en multiples lugares.
-//				-	LISTO		Corregir funcionalidad de movimiento lateral del mazo en foco para que se pueda dejar presionada una tecla y el foco vaya iterando entre mazos
-//				-	LISTO		Hacer las fuentes globales para que se abran los .ttf una sola vez,	ej: g_fontArial12, g_fontPixelated18, etc.
+// PENDIENTES / MEJORAS / BUGS / ETC.: https://github.com/Jonatandb/Codebreaker_SDL1/issues
 
 #include "inc/Header.h"
 

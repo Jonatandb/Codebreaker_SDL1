@@ -1,8 +1,19 @@
+#	Carpetas excluídas (y sus archivos irrelevantes):
+bin/*
+!bin/*.dll		#No ignoro las dll ya que son requeridas cuando se ejecuta desde Windows.
+
+
+#	Archivos relacionados con Visual Studio 2012:
 *.sdf
 *.suo
 *.opensdf
 *.user
-#*.filters	#Mantiene las "Carpetas virtuales en el explorador de soluciones"
+#*.filters	#Mantiene las "Carpetas virtuales" creadas en el explorador de soluciones.
+
+
+#	Archivos relacionados con Codeblocks:
+*.layout
+
+
+#	Archivos relacionados con la apertura del proyecto desde editores de texto desde Linux:
 #*~
-bin/*
-!bin/*.dll
