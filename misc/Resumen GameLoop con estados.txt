@@ -1,0 +1,26 @@
+Pegar en:		https://www.text2mindmap.com/
+
+main
+	Init()
+		SDL_Init
+		SDL_SetVideoMode
+		...
+		g_StateStack.push(Game)
+	While(1)
+		EstadoActual(ej Game):
+			HandleGameInput()
+				object->Move(DOWN)
+					object.x -= n;
+			ClearScreen()
+			DrawBackground()
+			{personajes, objetos}->Draw()
+			{DisplayText's}
+			SDL_UpdateRect() {SDL_Flip}
+			SDL_Delay(x ms)
+		)
+	Shutdown()
+		delete object
+		SDL_FreeSurface(background)
+		TTF_Quit()
+		SDL_Quit()
+		...
