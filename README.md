@@ -1,6 +1,8 @@
 # Codebreaker
 
-https://github.com/Jonatandb/Codebreaker_SDL1_VisualStudio
+https://github.com/Jonatandb/Codebreaker_SDL1.git
+
+
 
 Adivinar el código
 -------------------
