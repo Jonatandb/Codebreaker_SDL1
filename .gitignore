@@ -1,7 +1,8 @@
 *.sdf
 *.suo
-#*.filters	#Mantiene las "Carpetas virtuales en el explorador de soluciones"
+*.opensdf
 *.user
+#*.filters	#Mantiene las "Carpetas virtuales en el explorador de soluciones"
 #*~
 bin/*
 !bin/*.dll
