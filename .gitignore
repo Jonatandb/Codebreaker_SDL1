@@ -1,0 +1,7 @@
+*.sdf
+*.suo
+#*.filters	#Mantiene las "Carpetas virtuales en el explorador de soluciones"
+*.user
+#*~
+bin/*
+!bin/*.dll

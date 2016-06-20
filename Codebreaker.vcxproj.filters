@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="inc\Background.cpp">
+      <Filter>inc\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Borde.cpp">
+      <Filter>inc\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Carta.cpp">
+      <Filter>inc\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Colores.cpp">
+      <Filter>inc\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\IA.cpp">
+      <Filter>inc\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\ImpresionDeTexto.cpp">
+      <Filter>inc\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Logger.cpp">
+      <Filter>inc\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Mazo.cpp">
+      <Filter>inc\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Nivel.cpp">
+      <Filter>inc\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Random.cpp">
+      <Filter>inc\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Resultados.cpp">
+      <Filter>inc\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Tablero.cpp">
+      <Filter>inc\Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="inc\Background.h">
+      <Filter>inc\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Borde.h">
+      <Filter>inc\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Carta.h">
+      <Filter>inc\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Defines.h">
+      <Filter>inc\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Header.h">
+      <Filter>inc\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\IA.h">
+      <Filter>inc\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\ImpresionDeTexto.h">
+      <Filter>inc\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Includes.h">
+      <Filter>inc\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Mazo.h">
+      <Filter>inc\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Nivel.h">
+      <Filter>inc\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Resultados.h">
+      <Filter>inc\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Tablero.h">
+      <Filter>inc\Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="inc">
+      <UniqueIdentifier>{6e3dd819-9cc9-4c49-8d3c-d6dc1e5a2e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\Headers">
+      <UniqueIdentifier>{02e4b844-f09d-414d-b0d9-afcd32a22504}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\Sources">
+      <UniqueIdentifier>{9a73570b-a2a2-413f-a702-7ce93a5a2859}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
