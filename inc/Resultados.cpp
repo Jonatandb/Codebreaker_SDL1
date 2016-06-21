@@ -191,8 +191,8 @@ void Resultados::DibujarInfo()
 	pos.y = bordesInfo_y + _grosorBorde + 80;
 	string intentos = "Intentos restantes: ";
 	int cantidadRestante = ( int ) _nivel->GetMaximosIntentos() - _ia->CantidadIntentos();
-    std::ostringstream cantidadRestanteString;
-    cantidadRestanteString << _nivel->GetNivelActual();
+	std::ostringstream cantidadRestanteString;
+	cantidadRestanteString << cantidadRestante;
 	intentos.append( cantidadRestanteString.str() );
 	_texto->MostrarTexto( intentos, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 
