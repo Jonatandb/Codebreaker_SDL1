@@ -50,7 +50,9 @@ string IA::GetNumeroSecretoString()
 	string secret = "";
 	for( int i = 0 ; i < _aleatorio.size() ; i++ )
 	{
-		secret.append( to_string( _aleatorio[ i ] ) );
+        std::ostringstream aleatorioString;
+        aleatorioString << _aleatorio[ i ];
+        secret.append( aleatorioString.str() );
 	}
 	return secret;
 }
@@ -61,7 +63,7 @@ string IA::GetNumeroSecretoString()
 // Incrementa la cantidad de intentos realizados.
 // Registra internamente si el usuario ganó luego de verificarse el ingreso.
 vector<char> IA::GetResultadoValidarIngreso( Resultados* resultados, vector<int> numeroIngresado )
-{	
+{
 	vector <char> result;
 	if( numeroIngresado.size() <= 0 || resultados->BuscarEnVectorInt( numeroIngresado ) ) return result;
 	_cantIntentos++;

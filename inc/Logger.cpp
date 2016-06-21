@@ -2,6 +2,7 @@
 
 #include <fstream>	 // Para loguear en log.txt
 #include <string>
+#include <stdlib.h>
 using namespace std; // save us from writing "std::" everywhere
 
 class Logger
@@ -18,7 +19,7 @@ public:
 	~Logger()
 	{
 		//Logger::Log( "Logger\t\tId = " + to_string( _id) + "\t\tEliminado." );
-		// Cerrar el fichero, 
+		// Cerrar el fichero,
 		// para luego poder abrirlo para lectura:
 		_file.close();
 	}

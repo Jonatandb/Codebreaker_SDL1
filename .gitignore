@@ -13,6 +13,7 @@ bin/*
 
 #	Archivos relacionados con Codeblocks:
 *.layout
+*.depend
 
 
 #	Archivos relacionados con la apertura del proyecto desde editores de texto desde Linux:

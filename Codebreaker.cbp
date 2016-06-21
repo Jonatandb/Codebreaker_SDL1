@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Codebreaker" />
+		<Option pch_mode="2" />
+		<Option compiler="gnu_gcc_compiler_configurado_para_usar_sdl_1_-_jonatandb" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Codebreaker_CB_Debug" prefix_auto="1" extension_auto="1" />
+				<Option object_output="bin/Debug/o/" />
+				<Option type="0" />
+				<Option compiler="gnu_gcc_compiler_configurado_para_usar_sdl_1_-_jonatandb" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Codebreaker_CB_Release" prefix_auto="1" extension_auto="1" />
+				<Option object_output="bin/Release/o/" />
+				<Option type="0" />
+				<Option compiler="gnu_gcc_compiler_configurado_para_usar_sdl_1_-_jonatandb" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Main.cpp" />
+		<Unit filename="inc/Background.cpp" />
+		<Unit filename="inc/Background.h" />
+		<Unit filename="inc/Borde.cpp" />
+		<Unit filename="inc/Borde.h" />
+		<Unit filename="inc/Carta.cpp" />
+		<Unit filename="inc/Carta.h" />
+		<Unit filename="inc/Colores.cpp" />
+		<Unit filename="inc/Defines.h" />
+		<Unit filename="inc/Header.h" />
+		<Unit filename="inc/IA.cpp" />
+		<Unit filename="inc/IA.h" />
+		<Unit filename="inc/ImpresionDeTexto.cpp" />
+		<Unit filename="inc/ImpresionDeTexto.h" />
+		<Unit filename="inc/Includes.h" />
+		<Unit filename="inc/Logger.cpp" />
+		<Unit filename="inc/Mazo.cpp" />
+		<Unit filename="inc/Mazo.h" />
+		<Unit filename="inc/Nivel.cpp" />
+		<Unit filename="inc/Nivel.h" />
+		<Unit filename="inc/Random.cpp" />
+		<Unit filename="inc/Resultados.cpp" />
+		<Unit filename="inc/Resultados.h" />
+		<Unit filename="inc/Tablero.cpp" />
+		<Unit filename="inc/Tablero.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

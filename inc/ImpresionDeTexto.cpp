@@ -20,34 +20,34 @@ ImpresionDeTexto::~ImpresionDeTexto()
 	TTF_CloseFont( _pixelated20 );
 }
 
-void ImpresionDeTexto::MostrarTexto( string texto, Fuentes fuente, int x, int y, SDL_Surface* pantallaDestino, int fR, int fG, int fB, int bR, int bG, int bB )
+void ImpresionDeTexto::MostrarTexto( string texto, int fuente, int x, int y, SDL_Surface* pantallaDestino, int fR, int fG, int fB, int bR, int bG, int bB )
 {
-	SDL_Color foreground = { fR, fG, fB };  // Text color. 
+	SDL_Color foreground = { fR, fG, fB };  // Text color.
 	SDL_Color background = { bR, bG, bB };  // Color of what's behind the text.
-	SDL_Rect destination = { x, y, 0, 0 };	// A structure storing the destination of our text. 
+	SDL_Rect destination = { x, y, 0, 0 };	// A structure storing the destination of our text.
 	MostrarTexto( texto, fuente, destination, pantallaDestino, foreground, background );
 }
 
-void ImpresionDeTexto::MostrarTexto( string texto, Fuentes fuente, SDL_Rect destination, SDL_Surface* pantallaDestino, int fR, int fG, int fB, int bR, int bG, int bB )
+void ImpresionDeTexto::MostrarTexto( string texto, int fuente, SDL_Rect destination, SDL_Surface* pantallaDestino, int fR, int fG, int fB, int bR, int bG, int bB )
 {
-	SDL_Color foreground = { fR, fG, fB };  // Text color. 
+	SDL_Color foreground = { fR, fG, fB };  // Text color.
 	SDL_Color background = { bR, bG, bB };  // Color of what's behind the text.
 	MostrarTexto( texto, fuente, destination, pantallaDestino, foreground, background );
 }
 
-void ImpresionDeTexto::MostrarTexto( string texto, Fuentes fuente, int x, int y, SDL_Surface* pantallaDestino, SDL_Color foreground, SDL_Color background )
+void ImpresionDeTexto::MostrarTexto( string texto, int fuente, int x, int y, SDL_Surface* pantallaDestino, SDL_Color foreground, SDL_Color background )
 {
-	SDL_Rect destination = { x, y, 0, 0 };	// A structure storing the destination of our text. 
+	SDL_Rect destination = { x, y, 0, 0 };	// A structure storing the destination of our text.
 	MostrarTexto( texto, fuente, destination, pantallaDestino, foreground, background );
 }
 
-void ImpresionDeTexto::MostrarTexto( string texto, Fuentes fuente, SDL_Rect destination, SDL_Surface* pantallaDestino, SDL_Color foreground, SDL_Color background )
+void ImpresionDeTexto::MostrarTexto( string texto, int fuente, SDL_Rect destination, SDL_Surface* pantallaDestino, SDL_Color foreground, SDL_Color background )
 {
 	// This renders our text to a temporary surface.
 	SDL_Surface* temp = TTF_RenderText_Shaded( GetFont(fuente), texto.c_str(), foreground, background );
-	// Blit the text surface to our window surface, the NULL specifies the whole surface. 
+	// Blit the text surface to our window surface, the NULL specifies the whole surface.
 	SDL_BlitSurface( temp, NULL, pantallaDestino, &destination );
-	// Always free memory! 
+	// Always free memory!
 	SDL_FreeSurface( temp );
 }
 

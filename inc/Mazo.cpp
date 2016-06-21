@@ -9,7 +9,9 @@ Mazo::Mazo( SDL_Rect ubicacion )
 	_posCartaActiva = CARTAS_POR_MAZO - 1; // Por defecto un mazo tiene como carta activa la carta con signo de pregunta.
 	for( int i = 0; i < CARTAS_POR_MAZO; i++ )
 	{
-		string rutaImagen = "assets/images/" + to_string(i) + ".bmp";
+        std::ostringstream rutaImagenString;
+        rutaImagenString << i;
+		string rutaImagen = "assets/images/" + rutaImagenString.str() + ".bmp";
 		_carta[i] = new Carta( i, rutaImagen, 0, 0, CARTA_W, CARTA_H );
 	}
 }
@@ -20,7 +22,7 @@ Mazo::~Mazo()
 	for( int i = 0; i < CARTAS_POR_MAZO; i++ )
 	{
 		delete _carta[i];
-	}		
+	}
 }
 
 bool Mazo::Dibujar( SDL_Surface* window )

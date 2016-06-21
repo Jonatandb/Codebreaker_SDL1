@@ -3,7 +3,7 @@
 class Colores
 {
 public:
-	static enum ColoresTest
+	static enum
 	{
 		Blanco_R = 255,
 		Blanco_G = 255,
@@ -47,5 +47,5 @@ public:
 		RojoIntenso_R = 255,
 		RojoIntenso_G = 40,
 		RojoIntenso_B = 80
-	};
+	} ColoresTest;
 };

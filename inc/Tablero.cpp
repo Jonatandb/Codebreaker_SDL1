@@ -2,7 +2,7 @@
 
 #include "Tablero.h"
 
-Tablero::Tablero( int nivelActual, int cantidadMazos, SDL_Surface* window ) 
+Tablero::Tablero( int nivelActual, int cantidadMazos, SDL_Surface* window )
 {
 	_id = cRandom::getRandom();	//Logger::Log( "Tablero\t\tId = " + to_string( _id) + "\t\tCreado." );
 	_window = window;
@@ -58,7 +58,7 @@ void Tablero::SetearUbicacion( int nivelActual )
 
 bool Tablero::BuscarEnVector( vector<int> origen, int numero )
 {
-	vector<int>::iterator it; 
+	vector<int>::iterator it;
 	it = find ( origen.begin(), origen.end(), numero );
 	if (it != origen.end())
 		return true;
@@ -77,13 +77,13 @@ void Tablero::DibujarBordes()
 	{
 		if( ( SDL_GetTicks() - _tiempoDibujandoBorde ) <= 650  || _bordeEstatico)
 		{
-			SDL_Rect lineaSuperior  = { posMazoActivo.x, posMazoActivo.y, CARTA_W, grosorBorde };							
+			SDL_Rect lineaSuperior  = { posMazoActivo.x, posMazoActivo.y, CARTA_W, grosorBorde };
 			SDL_FillRect(_window, &lineaSuperior,  colorBorde );
-			SDL_Rect lineaInferior  = { posMazoActivo.x, posMazoActivo.y + CARTA_H - grosorBorde, CARTA_W, grosorBorde };	
+			SDL_Rect lineaInferior  = { posMazoActivo.x, posMazoActivo.y + CARTA_H - grosorBorde, CARTA_W, grosorBorde };
 			SDL_FillRect(_window, &lineaInferior,  colorBorde );
-			SDL_Rect lineaIzquierda = { posMazoActivo.x, posMazoActivo.y, grosorBorde, CARTA_H };							
+			SDL_Rect lineaIzquierda = { posMazoActivo.x, posMazoActivo.y, grosorBorde, CARTA_H };
 			SDL_FillRect(_window, &lineaIzquierda, colorBorde );
-			SDL_Rect lineaDerecha   = { posMazoActivo.x + CARTA_W - grosorBorde, posMazoActivo.y, grosorBorde, CARTA_H }; 	
+			SDL_Rect lineaDerecha   = { posMazoActivo.x + CARTA_W - grosorBorde, posMazoActivo.y, grosorBorde, CARTA_H };
 			SDL_FillRect(_window, &lineaDerecha,   colorBorde );
 		}
 		else
@@ -185,7 +185,9 @@ string Tablero::GetNumeroIngresadoString()
 		}
 		else
 		{
-			numeroSeleccionado += to_string( _mazos[ i ]->CartaActiva() );
+            std::ostringstream numeroSeleccionadoString;
+            numeroSeleccionadoString << _mazos[ i ]->CartaActiva();
+            numeroSeleccionado.append( numeroSeleccionadoString.str() );
 		}
 	}
 	return numeroSeleccionado;

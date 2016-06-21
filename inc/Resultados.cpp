@@ -19,7 +19,7 @@ Resultados::~Resultados()
 
 bool Resultados::BuscarEnVector( string numero )
 {
-	vector<string>::iterator it; 
+	vector<string>::iterator it;
 	it = find ( _ingresos.begin(), _ingresos.end(), numero );
 	if (it != _ingresos.end())
 		return true;
@@ -64,7 +64,7 @@ void Resultados::DibujarBordes()
 		bordesResultado_y = bordesInfo_y + bordesInfo_h;
 		bordesResultado_w = bordesInfo_w;
 		bordesResultado_h = WINDOW_HEIGHT - ( bordesInfo_y + bordesInfo_h) - bordesInfo_y;
-		color = SDL_MapRGB( _window->format, Colores::Azul_R, Colores::Azul_G, Colores::Azul_B );					
+		color = SDL_MapRGB( _window->format, Colores::Azul_R, Colores::Azul_G, Colores::Azul_B );
 		break;
 	case 4:
 		bordesInfo_x = 0;
@@ -74,17 +74,17 @@ void Resultados::DibujarBordes()
 		bordesResultado_x = bordesInfo_x + bordesInfo_w;
 		bordesResultado_y = bordesInfo_y;
 		bordesResultado_w = WINDOW_WIDTH - ( bordesInfo_x + bordesInfo_w) - bordesInfo_x;
-		bordesResultado_h = bordesInfo_h; 
+		bordesResultado_h = bordesInfo_h;
 		color = SDL_MapRGB( _window->format, Colores::Rojo_R, Colores::Rojo_G, Colores::Rojo_B );
 		break;
 	}
-	
+
 	Borde* bordesInfo = new Borde( bordesInfo_x, bordesInfo_y, bordesInfo_w, bordesInfo_h, _grosorBorde, color );
 	bordesInfo->Dibujar( _window );
 
 	Borde* bordesResultado = new Borde( bordesResultado_x, bordesResultado_y, bordesResultado_w, bordesResultado_h, _grosorBorde, color );
 	bordesResultado->Dibujar( _window );
-	
+
 	delete bordesInfo;
 	delete bordesResultado;
 }
@@ -97,7 +97,7 @@ void Resultados::DibujarBordes()
 //	int ancho = 10;
 //	Uint32 color = SDL_MapRGB( _window->format, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B );
 //	int alturaTexto = 20; // Porque uso Pixelated20
-//	
+//
 //	x = _x;
 //	y = _y;
 //	ancho = _w;
@@ -127,7 +127,7 @@ void Resultados::DibujarBordes()
 //		//y = 20;
 //		//alto = _nivel->GetMaximosIntentos() * alturaTexto + y + 5;  //625; // Espacio para 30 intentos
 //		//ancho = 173;
-//		color = SDL_MapRGB( _window->format, Colores::Azul_R, Colores::Azul_G, Colores::Azul_B );					
+//		color = SDL_MapRGB( _window->format, Colores::Azul_R, Colores::Azul_G, Colores::Azul_B );
 //		break;
 //	case 4:
 //		//x = 831;
@@ -137,7 +137,7 @@ void Resultados::DibujarBordes()
 //		color = SDL_MapRGB( _window->format, Colores::Rojo_R, Colores::Rojo_G, Colores::Rojo_B );
 //		break;
 //	}
-//	
+//
 //	Borde* test = new Borde( 0, 640, 255, 128, 10, SDL_MapRGB( g_Window->format, Colores::Azul_R, Colores::Azul_G, Colores::Azul_B ) );
 //
 //	return new Borde( x, y, ancho, alto, _grosorBorde, color );
@@ -181,7 +181,9 @@ void Resultados::DibujarInfo()
 	pos.x = bordesInfo_x + _grosorBorde + 5;
 	pos.y = bordesInfo_y + _grosorBorde + 50;
 	string nivel = "Nivel: ";
-	nivel.append( to_string( _nivel->GetNivelActual() ) );
+    std::ostringstream nivelString;
+    nivelString << _nivel->GetNivelActual();
+	nivel.append( nivelString.str() );
 	_texto->MostrarTexto( nivel, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 
 	// Intentos restantes:
@@ -189,7 +191,9 @@ void Resultados::DibujarInfo()
 	pos.y = bordesInfo_y + _grosorBorde + 80;
 	string intentos = "Intentos restantes: ";
 	int cantidadRestante = ( int ) _nivel->GetMaximosIntentos() - _ia->CantidadIntentos();
-	intentos.append( to_string( cantidadRestante ) );
+    std::ostringstream cantidadRestanteString;
+    cantidadRestanteString << _nivel->GetNivelActual();
+	intentos.append( cantidadRestanteString.str() );
 	_texto->MostrarTexto( intentos, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 
 	//// Numero secreto:
@@ -204,7 +208,7 @@ void Resultados::DibujarInfo()
 			//string numeroSecreto = "Numero secreto: ";
 			//numeroSecreto.append( _ia->GetNumeroSecretoString() );
 			//_texto->MostrarTexto( numeroSecreto, ImpresionDeTexto::Pixelated20, pos, _window, Colores::GrisOscuro_R, Colores::GrisOscuro_G, Colores::GrisOscuro_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
-						
+
 	//		// Mouse coords:
 	//		if( g_Event.type == SDL_MOUSEMOTION)
 	//		{
@@ -242,10 +246,9 @@ void Resultados::DibujarResultados()
 	int anchoMaximoEstimado = 150; // NOTA: Como no se el ancho del texto, estimé a ojo que con la fuente utilizada y basandome en la cadena mas larga ( "44444 - OOOOO" ) que el ancho del texto es de aprox. 80 pixeles.
 
 	for( int pos = 0; pos < _ingresos.size(); pos++ )
-	{	
+	{
 		int porcentajeProgreso = CalcularPorcentajeProgreso( pos );
 		int _altoFuente = 20;	// Establecer el alto en pixeles de la fuente utilizada, usé 20 basandome en la altura estimada de la fuente Pixelated20;
-		ImpresionDeTexto::Fuentes _fuente = ImpresionDeTexto::Fuentes::Pixelated20;
 
 		// Calculo Y
 		ultimo_y = bordesResultado_y + _grosorBorde + contador_y * _altoFuente;
@@ -276,7 +279,7 @@ void Resultados::DibujarResultados()
 
 		// Establezco color de frente del texto según cantidad de intetos utilizados y restantes:
 		SDL_Color colorFrente;
-		
+
 		if( porcentajeProgreso <= 17 )
 		{
 			colorFrente.r = Colores::Blanco_R;
@@ -304,13 +307,13 @@ void Resultados::DibujarResultados()
 			colorFrente.b = 0;
 		}
 		else if( porcentajeProgreso > 64 && porcentajeProgreso <= 80 )
-		{   
+		{
 			// Naranja 2
 			colorFrente.r = 255;
 			colorFrente.g = 127;
 			colorFrente.b = 39;
 		}
-		else 
+		else
 		{
 			colorFrente.r = Colores::Rojo_R;
 			colorFrente.g = Colores::Rojo_G;
@@ -322,10 +325,10 @@ void Resultados::DibujarResultados()
 		SDL_Rect destino = { ultimo_x, ultimo_y };
 
 		// Limpio linea
-		_texto->MostrarTexto( "WWWWWWWWW", (ImpresionDeTexto::Fuentes)_fuente, destino, _window, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );	
+		_texto->MostrarTexto( "WWWWWWWWW", ImpresionDeTexto::Pixelated20, destino, _window, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 
 		// Muestro Ingreso - Resultado
-		_texto->MostrarTexto( salida, (ImpresionDeTexto::Fuentes)_fuente, destino, _window, colorFrente, colorFondo );			
+		_texto->MostrarTexto( salida, ImpresionDeTexto::Pixelated20, destino, _window, colorFrente, colorFondo );
 	}
 }
 
@@ -349,10 +352,12 @@ bool Resultados::BuscarEnVectorInt( vector<int> numero )
 	string numeroBuscado = "";
 	for( int i = 0 ; i < numero.size() ; i++ )
 	{
-		numeroBuscado.append( to_string( numero[ i ] ) );
+	    std::ostringstream numeroBuscadoString;
+        numeroBuscadoString << i;
+        numeroBuscado.append( numeroBuscadoString.str() );
 	}
 
-	vector<string>::iterator it; 
+	vector<string>::iterator it;
 	it = find ( _ingresos.begin(), _ingresos.end(), numeroBuscado );
 	if (it != _ingresos.end())
 		return true;
@@ -374,20 +379,20 @@ bool Resultados::BuscarEnVectorInt( vector<int> numero )
 	//int anchoMaximoEstimado = 120; // NOTA: Como no se el ancho del texto, estimé a ojo que con la fuente utilizada y basandome en la cadena mas larga ( "44444 - OOOOO" ) que el ancho del texto es de aprox. 80 pixeles.
 
 	//for( int pos = 0; pos < _ingresos.size(); pos++ )
-	//{	
+	//{
 	//	int _altoFuente = 20;	// Establecer el alto en pixeles de la fuente utilizada, usé 20 basandome en la altura estimada de la fuente Pixelated20;
 	//	ImpresionDeTexto::Fuentes _fuente = ImpresionDeTexto::Fuentes::Pixelated20;
 
 	//	// Que comience la Magia!! :D
-	//	
+	//
 	//	/*
 	//	Funcionalidades detectadas:
 	//	- Verifico Y (Cuando se llega al limite vertical, comenzar arriba mas la derecha)
 	//		KO:	(Se llegó al limite vertical)
-	//			- Resetear Y	(Comenzar arriba) 
+	//			- Resetear Y	(Comenzar arriba)
 	//			- Incrementar X	(Mas a la derecha)		//, calcular x (si no se puede, resetear x) )
 	//													si no se puede, comenzar arriba en la misma columna.
-	//		OK: 
+	//		OK:
 	//			- Incremento Y
 	//	- Calculo Y
 
@@ -395,7 +400,7 @@ bool Resultados::BuscarEnVectorInt( vector<int> numero )
 	//		KO:	(Se llegó al limite horizontal)
 	//			- Resetear X	(Comenzar a la izquierda)
 	//			- Incrementar Y	(Mas abajo)
-	//		
+	//
 	//		OK:
 	//			- Incrementar X							//, calcular y (si no se puede, resetear y) )
 	//													si no se puede, comenzar a la izquierda en la misma fila.
@@ -430,7 +435,7 @@ bool Resultados::BuscarEnVectorInt( vector<int> numero )
 	//	siempre aumento y
 	//	cuando ya no se pueda, reseteo y
 	//	aumento x
-	//		si no se puede 
+	//		si no se puede
 	//			reseteo x
 	//	*/
 
@@ -442,7 +447,7 @@ bool Resultados::BuscarEnVectorInt( vector<int> numero )
 	//	// Tengo en cuenta de que la primera vez sola debo contemplar la altura del borde
 	//	ultimo_y = _y + _grosorBorde + contador_y * _altoFuente;
 	//	contador_y++;
-	//	
+	//
 	//	if( ultimo_y >= _y + _h - _altoFuente - _grosorBorde )
 	//	{
 	//		// No entra verticalemente una linea mas
@@ -538,13 +543,13 @@ bool Resultados::BuscarEnVectorInt( vector<int> numero )
 	//		colorFrente.b = 0;
 	//	}
 	//	else if( porcentajeProgreso > 64 && porcentajeProgreso <= 80 )
-	//	{   
+	//	{
 	//		// Naranja 2
 	//		colorFrente.r = 255;
 	//		colorFrente.g = 127;
 	//		colorFrente.b = 39;
 	//	}
-	//	else 
+	//	else
 	//	{
 	//		colorFrente.r = Colores::Rojo_R;
 	//		colorFrente.g = Colores::Rojo_G;
@@ -556,8 +561,8 @@ bool Resultados::BuscarEnVectorInt( vector<int> numero )
 	//	SDL_Rect destino = { ultimo_x, ultimo_y };
 
 	//	// Limpio linea
-	//	texto->MostrarTexto( "WWWWWWWWW", (ImpresionDeTexto::Fuentes)_fuente, destino, _window, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );	
+	//	texto->MostrarTexto( "WWWWWWWWW", (ImpresionDeTexto::Fuentes)_fuente, destino, _window, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 
 	//	// Muestro Ingreso - Resultado
-	//	texto->MostrarTexto( salida, (ImpresionDeTexto::Fuentes)_fuente, destino, _window, colorFrente, colorFondo );			
+	//	texto->MostrarTexto( salida, (ImpresionDeTexto::Fuentes)_fuente, destino, _window, colorFrente, colorFondo );
 	//}

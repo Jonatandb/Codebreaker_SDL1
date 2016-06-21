@@ -2,8 +2,10 @@
 
 #include "Defines.h"
 #include "Includes.h"
+#include <algorithm>	// Para find().
+#include <sstream>		// Para ostringstream
 
-class Resultados;	// http://stackoverflow.com/a/23283140
+class Resultados;		// http://stackoverflow.com/a/23283140
 
 class IA
 {

@@ -15,15 +15,15 @@ private:
 public:
 	ImpresionDeTexto();
 	~ImpresionDeTexto();
-	static enum Fuentes
+	static enum
 	{
 		Arial40,
 		Pixelated20,
-		Pretendo18, 
+		Pretendo18,
 		Pretendo90
-	};
-	void MostrarTexto( string texto, Fuentes fuente, int x, int y, SDL_Surface* pantallaDestino, int fR, int fG, int fB, int bR, int bG, int bB );
-	void MostrarTexto( string texto, Fuentes fuente, SDL_Rect destination, SDL_Surface* pantallaDestino, int fR, int fG, int fB, int bR, int bG, int bB );
-	void MostrarTexto( string texto, Fuentes fuente, int x, int y, SDL_Surface* pantallaDestino, SDL_Color foreground, SDL_Color background );
-	void MostrarTexto( string texto, Fuentes fuente, SDL_Rect destination, SDL_Surface* pantallaDestino, SDL_Color foreground, SDL_Color background );
+	} Fuentes;
+	void MostrarTexto( string texto, int fuente, int x, int y, SDL_Surface* pantallaDestino, int fR, int fG, int fB, int bR, int bG, int bB );
+	void MostrarTexto( string texto, int fuente, SDL_Rect destination, SDL_Surface* pantallaDestino, int fR, int fG, int fB, int bR, int bG, int bB );
+	void MostrarTexto( string texto, int fuente, int x, int y, SDL_Surface* pantallaDestino, SDL_Color foreground, SDL_Color background );
+	void MostrarTexto( string texto, int fuente, SDL_Rect destination, SDL_Surface* pantallaDestino, SDL_Color foreground, SDL_Color background );
 };

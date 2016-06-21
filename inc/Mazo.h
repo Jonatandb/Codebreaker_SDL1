@@ -2,6 +2,7 @@
 
 #include "Defines.h"
 #include "Includes.h"
+#include <sstream>		// Para ostringstream
 
 class Carta;	// http://stackoverflow.com/a/23283140
 
