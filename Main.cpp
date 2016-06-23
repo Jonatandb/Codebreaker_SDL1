@@ -46,9 +46,6 @@ void HandleWinLoseInput();
 
 int main(int argc, char* argv[] )
 {
-		Uint16 g_mouse_x = 0;
-			Uint16 g_mouse_y = 0;
-
 	Init();
 
 	// Our game loop is just a while loop that breaks when our state stack is empty.
@@ -187,7 +184,7 @@ void Game()
 {
 	// Here we compare the difference between the current time and the last time we
 	// handled a frame. If FRAME_RATE amount of time has, it's time for a new frame.
-	if ( (SDL_GetTicks() - g_Timer) >= FRAME_RATE )
+	if ( ( SDL_GetTicks() - g_Timer ) >= FRAME_RATE )
 	{
 		HandleGameInput();  // No puedo dibujar desde aca adentro!
 
@@ -198,10 +195,11 @@ void Game()
 
 		g_Tablero->Dibujar();
 
+		g_Resultados->HandleInput( &g_Event );
 		g_Resultados->Dibujar();
 
 		// Tell SDL to display our backbuffer. The four 0's will make SDL display the whole screen.
-		SDL_UpdateRect(g_Window, 0, 0, 0, 0);
+		SDL_UpdateRect( g_Window, 0, 0, 0, 0 );
 
 		// We've processed a frame so we now need to record the time at which we did it.
 		// This way we can compare this time with the next time our function gets called and
@@ -373,13 +371,14 @@ void HandleGameInput()
 	//SDL_QUIT		Quita todos								nada
 	//SDLK_ESCAPE	Quita Game								Exit, Menu
 	//Victoria		Quita Game, Quita Menu, Agrega WinLose	Exit, WinLose
-	static bool derechaPresionada	= false;
-	static bool izquerdaPresionada	= false;
-	static bool arribaPresionada	= false;
-	static bool abajoPresionada		= false;
+
+	//static bool derechaPresionada		= false;
+	//static bool izquerdaPresionada	= false;
+	//static bool arribaPresionada		= false;
+	//static bool abajoPresionada		= false;
 
 	// Fill our event structure with event information.
-	if( SDL_PollEvent(&g_Event) )
+	if( SDL_PollEvent( &g_Event) )
 	{
 		// Handle user manually closing game window
 		if( g_Event.type == SDL_QUIT )
@@ -400,31 +399,25 @@ void HandleGameInput()
 				g_StateStack.pop();
 				return; // this state is done, exit the function
 			}
-		}
-
-		//if( g_Event.type == SDL_MOUSEMOTION)
-		//{
-		//	g_MouseInfo->SetX(g_Event.motion.x);
-		//	g_MouseInfo->SetY(g_Event.motion.y);
-		//}
-
-		if( g_Event.type == SDL_KEYDOWN )
-		{
 			if( g_Event.key.keysym.sym == SDLK_RIGHT || g_Event.key.keysym.sym == SDLK_TAB )
 			{
-				derechaPresionada = true;
+				//derechaPresionada = true;
+				g_Tablero->FocoMazoDerecha();
 			}
 			if( g_Event.key.keysym.sym == SDLK_LEFT )
 			{
-				izquerdaPresionada = true;
+				//izquerdaPresionada = true;
+				g_Tablero->FocoMazoIzquierda();
 			}
 			if( g_Event.key.keysym.sym == SDLK_UP )
 			{
-				arribaPresionada = true;
+				//arribaPresionada = true;
+				g_Tablero->CartaSiguiente();	
 			}
 			if( g_Event.key.keysym.sym == SDLK_DOWN )
 			{
-				abajoPresionada = true;
+				//abajoPresionada = true;
+				g_Tablero->CartaAnterior();
 			}
 			if( g_Event.key.keysym.sym >= SDLK_0 && g_Event.key.keysym.sym <= SDLK_9)
 			{
@@ -466,50 +459,45 @@ void HandleGameInput()
 					return;
 				}
 			}
-
-			if( g_Event.key.keysym.sym == SDLK_j )
-			{
-				g_MostrarDebugInfo = true;
-			}
 		}
 
-		if (g_Event.type == SDL_KEYUP)
-		{
-			if (g_Event.key.keysym.sym == SDLK_RIGHT || g_Event.key.keysym.sym == SDLK_TAB )
-			{
-				derechaPresionada = false;
-			}
-			if (g_Event.key.keysym.sym == SDLK_LEFT)
-			{
-				izquerdaPresionada = false;
-			}
-			if( g_Event.key.keysym.sym == SDLK_UP )
-			{
-				arribaPresionada = false;
-			}
-			if( g_Event.key.keysym.sym == SDLK_DOWN )
-			{
-				abajoPresionada = false;
-			}
-		}
+		//if (g_Event.type == SDL_KEYUP)
+		//{
+		//	if (g_Event.key.keysym.sym == SDLK_RIGHT || g_Event.key.keysym.sym == SDLK_TAB )
+		//	{
+		//		derechaPresionada = false;
+		//	}
+		//	if (g_Event.key.keysym.sym == SDLK_LEFT)
+		//	{
+		//		izquerdaPresionada = false;
+		//	}
+		//	if( g_Event.key.keysym.sym == SDLK_UP )
+		//	{
+		//		arribaPresionada = false;
+		//	}
+		//	if( g_Event.key.keysym.sym == SDLK_DOWN )
+		//	{
+		//		abajoPresionada = false;
+		//	}
+		//}
 	}
 
-	if( derechaPresionada )
-	{
-		g_Tablero->FocoMazoDerecha();
-	}
-	if( izquerdaPresionada )
-	{
-		g_Tablero->FocoMazoIzquierda();
-	}
-	if( arribaPresionada )
-	{
-		g_Tablero->CartaSiguiente();
-	}
-	if( abajoPresionada )
-	{
-		g_Tablero->CartaAnterior();
-	}
+	//if( derechaPresionada )
+	//{
+	//	g_Tablero->FocoMazoDerecha();
+	//}
+	//if( izquerdaPresionada )
+	//{
+	//	g_Tablero->FocoMazoIzquierda();
+	//}
+	//if( arribaPresionada )
+	//{
+	//	g_Tablero->CartaSiguiente();
+	//}
+	//if( abajoPresionada )
+	//{
+	//	g_Tablero->CartaAnterior();
+	//}
 }
 
 // This function receives player input and

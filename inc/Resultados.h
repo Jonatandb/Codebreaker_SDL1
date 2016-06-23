@@ -22,6 +22,9 @@ private:
 	int bordesResultado_w;
 	int bordesResultado_h;
 	int _grosorBorde;
+	bool _mostrarDebugInfo;
+	Uint16 _mouse_x;
+	Uint16 _mouse_y;
 	vector<string> _ingresos;
 	vector<string> _resultados;
 	SDL_Surface* _window;
@@ -39,4 +42,5 @@ public:
 	void RegistrarIngreso( string numero, string resultado );
 	void Dibujar();
 	bool BuscarEnVectorInt( vector<int> numero );
+	void HandleInput( SDL_Event* event );
 };
