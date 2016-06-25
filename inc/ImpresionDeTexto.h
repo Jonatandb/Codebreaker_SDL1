@@ -7,6 +7,7 @@ class ImpresionDeTexto
 {
 private:
 	int _id;
+	TTF_Font* _arial20;
 	TTF_Font* _arial40;
 	TTF_Font* _pretendo18;
 	TTF_Font* _pretendo90;
@@ -17,6 +18,7 @@ public:
 	~ImpresionDeTexto();
 	static enum
 	{
+		Arial20,
 		Arial40,
 		Pixelated20,
 		Pretendo18,

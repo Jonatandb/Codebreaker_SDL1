@@ -5,6 +5,7 @@
 ImpresionDeTexto::ImpresionDeTexto()
 {
 	_id = cRandom::getRandom();	//Logger::Log( "ImpresionDeTexto\t\tId = " + to_string( _id) + "\t\tCreado." );
+	_arial20		= TTF_OpenFont( "assets/fonts/arial.ttf",     20 );
 	_arial40		= TTF_OpenFont( "assets/fonts/arial.ttf",     40 );
 	_pretendo18		= TTF_OpenFont( "assets/fonts/pretendo.ttf",  18 );
 	_pretendo90		= TTF_OpenFont( "assets/fonts/pretendo.ttf",  90 );
@@ -14,6 +15,7 @@ ImpresionDeTexto::ImpresionDeTexto()
 ImpresionDeTexto::~ImpresionDeTexto()
 {
 	//Logger::Log( "ImpresionDeTexto\t\tId = " + to_string( _id) + "\t\tEliminado." );
+	TTF_CloseFont( _arial20 );
 	TTF_CloseFont( _arial40 );
 	TTF_CloseFont( _pretendo90 );
 	TTF_CloseFont( _pretendo18 );
@@ -57,15 +59,18 @@ TTF_Font* ImpresionDeTexto::GetFont( int fuente )
 	{
 		default:
 		case 0:
-				return _arial40;
+				return _arial20;
 				break;
 		case 1:
-				return _pixelated20;
+				return _arial40;
 				break;
 		case 2:
-				return _pretendo18;
+				return _pixelated20;
 				break;
 		case 3:
+				return _pretendo18;
+				break;
+		case 4:
 				return _pretendo90;
 				break;
 	}

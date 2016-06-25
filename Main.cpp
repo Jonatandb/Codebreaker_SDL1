@@ -31,6 +31,7 @@ void Menu();
 void Game();
 void Exit();
 void WinLose();
+void Rules();
 
 // Init and Shutdown functions
 void Init();
@@ -43,6 +44,7 @@ void HandleMenuInput();
 void HandleGameInput();
 void HandleExitInput();
 void HandleWinLoseInput();
+void HandleRulesInput();
 
 int main(int argc, char* argv[] )
 {
@@ -159,8 +161,9 @@ void Menu()
 
 		g_Textos->MostrarTexto("Codebreaker", ImpresionDeTexto::Pretendo90, WINDOW_WIDTH/2-338, 100, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
 		g_Textos->MostrarTexto("(C)omenzar juego", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 250, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
-		g_Textos->MostrarTexto("(S)alir", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 300, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
-		g_Textos->MostrarTexto("2016 - angelsimon@gmail.com - jonatandb@gmail.com - V.1", ImpresionDeTexto::Pixelated20, WINDOW_WIDTH - 530, 728, g_Window, Colores::GrisOscuro_R, Colores::GrisOscuro_G, Colores::GrisOscuro_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+		g_Textos->MostrarTexto("(R)eglas", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 300, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+		g_Textos->MostrarTexto("(S)alir", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 350, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+		g_Textos->MostrarTexto("2016 - angelsimon@gmail.com - jonatandb@gmail.com - V.1", ImpresionDeTexto::Arial20, WINDOW_WIDTH - 565, 728, g_Window, Colores::GrisOscuro_R, Colores::GrisOscuro_G, Colores::GrisOscuro_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
 		// Tell SDL to display our backbuffer. The four 0's will make SDL display the whole screen.
 		SDL_UpdateRect( g_Window, 0, 0, 0, 0 );
 
@@ -286,6 +289,65 @@ void WinLose()
 	}
 }
 
+void Rules()
+{
+	// Here we compare the difference between the current time and the last time we
+	// handled a frame. If FRAME_RATE amount of time has, it's time for a new frame.
+	if ( (SDL_GetTicks() - g_Timer) >= FRAME_RATE )
+	{
+		HandleRulesInput();
+
+		// Make sure nothing from the last frame is still drawn.
+		ClearScreen();
+
+		g_Textos->MostrarTexto("Codebreaker", ImpresionDeTexto::Pretendo90, WINDOW_WIDTH/2-338, 100, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+
+		g_Textos->MostrarTexto("Adivinar el codigo", 
+			ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 250, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+		
+		g_Textos->MostrarTexto("El jugador debe adivinar el código que la computadora genera al azar.", 
+			ImpresionDeTexto::Arial20, WINDOW_WIDTH/2-338, 300, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+		
+		g_Textos->MostrarTexto("Suponiendo que el código a adivinar es 1234.", 
+			ImpresionDeTexto::Arial20, WINDOW_WIDTH/2-338, 330, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+		
+		g_Textos->MostrarTexto("Si el usuario ingresase 1246, lo que la computadora mostrará es OO#.", 
+			ImpresionDeTexto::Arial20, WINDOW_WIDTH/2-338, 360, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+
+		g_Textos->MostrarTexto("El usuario deberá saber que:",
+			ImpresionDeTexto::Arial20, WINDOW_WIDTH/2-338, 390, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+
+		g_Textos->MostrarTexto(" - Cada 'O' representará un digito adivinado.", 
+			ImpresionDeTexto::Arial20, WINDOW_WIDTH/2-338, 420, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+
+		g_Textos->MostrarTexto(" - Cada '#' representará un digito adivinado en su valor pero no en su", 
+			ImpresionDeTexto::Arial20, WINDOW_WIDTH/2-338, 450, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+
+		g_Textos->MostrarTexto("    posición.", 
+			ImpresionDeTexto::Arial20, WINDOW_WIDTH/2-338, 480, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+
+		g_Textos->MostrarTexto("La ronda/juego termina cuando el usuario ingresa el código correcto en", 
+			ImpresionDeTexto::Arial20, WINDOW_WIDTH/2-338, 510, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+
+		g_Textos->MostrarTexto("el orden correcto, en el ejemplo, deberá adivinar el código 1234.", 
+			ImpresionDeTexto::Arial20, WINDOW_WIDTH/2-338, 540, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+
+		g_Textos->MostrarTexto("(V)olver", ImpresionDeTexto::Arial20, WINDOW_WIDTH - 90, 728, g_Window, Colores::GrisOscuro_R, Colores::GrisOscuro_G, Colores::GrisOscuro_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+
+		// Tell SDL to display our backbuffer. The four 0's will make SDL display the whole screen.
+		SDL_UpdateRect( g_Window, 0, 0, 0, 0 );
+
+		// We've processed a frame so we now need to record the time at which we did it.
+		// This way we can compare this time with the next time our function gets called and
+		// see if enough time has passed between calls.
+		g_Timer = SDL_GetTicks();
+	}
+	else
+	{
+		SDL_Delay( SDL_GetTicks() - g_Timer );
+	}
+}
+
 // This function simply clears the back buffer to black.
 void ClearScreen()
 {
@@ -321,11 +383,6 @@ void HandleMenuInput()
 				g_StateStack.pop();
 				return;
 			}
-			if( g_Event.key.keysym.sym == SDLK_s )
-			{
-				g_StateStack.pop();
-				return;
-			}
 			if( g_Event.key.keysym.sym == SDLK_c )
 			{
 				delete g_Nivel;
@@ -335,6 +392,18 @@ void HandleMenuInput()
 
 				StateStruct temp;
 				temp.StatePointer = Game;
+				g_StateStack.push(temp);
+				return;
+			}
+			if( g_Event.key.keysym.sym == SDLK_s )
+			{
+				g_StateStack.pop();
+				return;
+			}
+			if( g_Event.key.keysym.sym == SDLK_r )
+			{
+				StateStruct temp;
+				temp.StatePointer = Rules;
 				g_StateStack.push(temp);
 				return;
 			}
@@ -525,6 +594,33 @@ void HandleWinLoseInput()
 				StateStruct temp;
 				temp.StatePointer = Exit;	g_StateStack.push(temp);
 				return;
+			}
+		}
+	}
+}
+
+void HandleRulesInput()
+{
+	// Fill our event structure with event information.
+	if ( SDL_PollEvent(&g_Event) )
+	{
+		// Handle user manually closing game window
+		if( g_Event.type == SDL_QUIT )
+		{
+			// While state stack isn't empty, pop
+			while( !g_StateStack.empty() )
+			{
+				g_StateStack.pop();
+			}
+			return;
+		}
+
+		// Handle keyboard input here
+		if( g_Event.type == SDL_KEYDOWN )
+		{
+			if( g_Event.key.keysym.sym == SDLK_ESCAPE || g_Event.key.keysym.sym == SDLK_v )
+			{
+				g_StateStack.pop();
 			}
 		}
 	}
