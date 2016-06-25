@@ -80,6 +80,9 @@ void Resultados::DibujarBordes()
 		bordesResultado_h = bordesInfo_h;
 		color = SDL_MapRGB( _window->format, Colores::Rojo_R, Colores::Rojo_G, Colores::Rojo_B );
 		break;
+	default:
+		color = SDL_MapRGB( _window->format, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B );
+		break;
 	}
 
 	Borde* bordesInfo = new Borde( bordesInfo_x, bordesInfo_y, bordesInfo_w, bordesInfo_h, _grosorBorde, color );
@@ -98,8 +101,6 @@ void Resultados::DibujarBordes()
 // Muestra por consola el numero que se intenta registrar.
 void Resultados::RegistrarIngreso( string numero, string resultado )
 {
-	//printf( "Numero ingresado: %s\n", numero.c_str() );
-
 	if( numero == "0" ) return;				// Solo permito ingresar numeros distintos de cero.
 
 	if( BuscarEnVector( numero ) ) return;	// Solo ingreso numeros que no hayan sido ingresados.
@@ -130,9 +131,9 @@ void Resultados::DibujarInfo()
 	pos.x = bordesInfo_x + _grosorBorde + 5;
 	pos.y = bordesInfo_y + _grosorBorde + 50;
 	string nivel = "Nivel: ";
-    std::ostringstream nivelString;
-    nivelString << _nivel->GetNivelActual();
-	nivel.append( nivelString.str() );
+	std::ostringstream nivelString;
+	nivelString << _nivel->GetNivelActual();
+	nivel.append( nivelString.str() );	// nivel.append( to_string( _nivel->GetNivelActual() ) ); // No funciona en Codeblocks
 	_texto->MostrarTexto( nivel, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 
 	// Intentos restantes:
@@ -142,7 +143,7 @@ void Resultados::DibujarInfo()
 	int cantidadRestante = ( int ) _nivel->GetMaximosIntentos() - _ia->CantidadIntentos();
 	std::ostringstream cantidadRestanteString;
 	cantidadRestanteString << cantidadRestante;
-	intentos.append( cantidadRestanteString.str() );
+	intentos.append( cantidadRestanteString.str() );	//intentos.append( to_string( cantidadRestante ) );	// No funciona en Codeblocks
 	_texto->MostrarTexto( intentos, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 
 	if( DEBUG_INFO_HABILITADA )
@@ -151,7 +152,7 @@ void Resultados::DibujarInfo()
 		if( _mostrarDebugInfo )
 		{
 
-			int y_debugInfo = 0;
+			int y_debugInfo = 25;
 
 			// Numero secreto:
 			pos.x = 235;
@@ -179,28 +180,19 @@ void Resultados::DibujarInfo()
 			resultadosSize.append( resultadosSizeString.str() );
 			_texto->MostrarTexto( resultadosSize, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 
-			//y_debugInfo += 25;
-			//pos.y = y_debugInfo;
-			//string ingresos = "Ingresos: ";
-			//numeroSecreto.append( _ia->GetNumeroSecretoString() );
-			//_texto->MostrarTexto( numeroSecreto, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
-
-			//y_debugInfo += 25;
-			//pos.y = y_debugInfo;			
-			//string resultados = "Resultados: ";
-			//numeroSecreto.append( _ia->GetNumeroSecretoString() );
-			//_texto->MostrarTexto( numeroSecreto, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
-
-
 			// Mouse coords:
-			y_debugInfo += 25;	
+			y_debugInfo += 25;
 			pos.y = y_debugInfo;
 			string mouse_x = "x = ";
-			mouse_x.append( to_string( _mouse_x ) );
+            std::ostringstream _mouse_xString;
+			_mouse_xString << _mouse_x;
+			mouse_x.append( _mouse_xString.str() );	//mouse_x.append( to_string( _mouse_x ) );	// No funciona en Codeblocks
 			_texto->MostrarTexto( mouse_x, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 			pos.x = 325;
 			string mouse_y = "y = ";
-			mouse_y.append( to_string( _mouse_y ) );
+            std::ostringstream _mouse_yString;
+			_mouse_yString << _mouse_y;
+			mouse_y.append( _mouse_yString.str() );	//mouse_y.append( to_string( _mouse_y ) );	// No funciona en Codeblocks
 			_texto->MostrarTexto( mouse_y, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 
 			//if( ( SDL_GetTicks() - tiempoMostrandoDebugInfo ) > 5000 )
@@ -286,6 +278,7 @@ void Resultados::DibujarResultados()
 		{
 			// Naranja 1
 			colorFrente.r = 236;
+
 			colorFrente.g = 179;
 			colorFrente.b = 0;
 		}
@@ -335,11 +328,10 @@ bool Resultados::BuscarEnVectorInt( vector<int> numero )
 	string numeroBuscado = "";
 	for( int i = 0 ; i < numero.size() ; i++ )
 	{
-	    std::ostringstream numeroBuscadoString;
-        numeroBuscadoString << i;
-        numeroBuscado.append( numeroBuscadoString.str() );
+		std::ostringstream numeroBuscadoString;
+		numeroBuscadoString << numero[ i ];
+		numeroBuscado.append( numeroBuscadoString.str() );	//numeroBuscado.append( to_string( numero[ i ] ) );	// No funciona en Codeblocks
 	}
-
 	vector<string>::iterator it;
 	it = find ( _ingresos.begin(), _ingresos.end(), numeroBuscado );
 	if (it != _ingresos.end())
@@ -349,7 +341,7 @@ bool Resultados::BuscarEnVectorInt( vector<int> numero )
 }
 
 void Resultados::HandleInput( SDL_Event* event)
-{	
+{
 	if( event->type == SDL_KEYDOWN )
 	{
 		if( event->key.keysym.sym == SDLK_j )

@@ -185,9 +185,9 @@ string Tablero::GetNumeroIngresadoString()
 		}
 		else
 		{
-            std::ostringstream numeroSeleccionadoString;
-            numeroSeleccionadoString << _mazos[ i ]->CartaActiva();
-            numeroSeleccionado.append( numeroSeleccionadoString.str() );
+			std::ostringstream numeroSeleccionadoString;
+			numeroSeleccionadoString << _mazos[ i ]->CartaActiva();
+			numeroSeleccionado.append( numeroSeleccionadoString.str() );	//numeroSeleccionado += to_string( _mazos[ i ]->CartaActiva() );	// No funciona en Codeblocks
 		}
 	}
 	return numeroSeleccionado;

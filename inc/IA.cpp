@@ -52,7 +52,7 @@ string IA::GetNumeroSecretoString()
 	{
         std::ostringstream aleatorioString;
         aleatorioString << _aleatorio[ i ];
-        secret.append( aleatorioString.str() );
+        secret.append( aleatorioString.str() );	//secret.append( to_string( _aleatorio[ i ] ) );	// No funciona en Codeblocks
 	}
 	return secret;
 }
@@ -70,8 +70,8 @@ vector<char> IA::GetResultadoValidarIngreso( Resultados* resultados, vector<int>
 	_usuarioGano = false;
 	int cantidadAciertos = 0;
 
-	unsigned short tam = _aleatorio.size();
-	for( int i = 0; i < tam; i++ )
+	unsigned short cantDigitosAzar = _aleatorio.size();
+	for( int i = 0; i < cantDigitosAzar; i++ )
 	{
 		int value = searchDigit( _aleatorio, numeroIngresado.at( i ), i );
 		if( value == 1 )
@@ -84,7 +84,7 @@ vector<char> IA::GetResultadoValidarIngreso( Resultados* resultados, vector<int>
 			result.push_back( '#' );
 		}
 	}
-	_usuarioGano = ( cantidadAciertos == _cantMazos );
+	_usuarioGano = ( cantidadAciertos == cantDigitosAzar );
 	return result;
 }
 

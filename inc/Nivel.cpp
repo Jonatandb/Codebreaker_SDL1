@@ -23,10 +23,10 @@ int Nivel::GetNivelActual()
 void Nivel::SubirNivel()
 {
 	_nivelActual++;
-	if( _nivelActual > 4 )
-	{
-		_nivelActual = 1;
-	}
+	//if( _nivelActual > 4 )
+	//{
+	//	_nivelActual = 1;
+	//}
 	_cantidadMazos = GetCantidadMazos();
 	_maximosIntentos = GetMaximosIntentos();
 }

@@ -51,6 +51,18 @@ int main(int argc, char* argv[] )
 	// Our game loop is just a while loop that breaks when our state stack is empty.
 	while (!g_StateStack.empty())
 	{
+		//{ // Debug info a nivel de todas las pantallas:
+		//	int stackSize = g_StateStack.size();
+		//	SDL_Rect pos;
+		//	pos.x = 235;
+		//	pos.y = 0;
+		//	string info = "Items en la pila: ";
+		//	info.append( to_string( stackSize ) );
+		//	info.append( " - Nivel actual: " );
+		//	info.append( to_string( g_Nivel->GetNivelActual() ) );
+		//	g_Textos->MostrarTexto( info, ImpresionDeTexto::Pixelated20, pos, g_Window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
+		//	SDL_UpdateRect( g_Window, 0, 0, 0, 0 );
+		//}
 		g_StateStack.top().StatePointer();
 	}
 
@@ -62,10 +74,6 @@ int main(int argc, char* argv[] )
 // This function initializes our game.
 void Init()
 {
-	// Init													Pila de estados:
-	//Agrega	Exit										Exit
-	//Agrega	Menu										Exit, Menu
-
 	// Initiliaze SDL video and our timer.
 	SDL_Init( SDL_INIT_VIDEO | SDL_INIT_TIMER);
 
@@ -105,13 +113,11 @@ void InicializarGameObjects()
 {
 	cRandom::Inicializar();
 
-	//delete g_Nivel;
 	delete g_Tablero;
 	delete g_Resultados;
 	delete g_IA;
 	delete g_Background;
 
-	//g_Nivel = new Nivel();
 	g_Tablero = new Tablero( g_Nivel->GetNivelActual(), g_Nivel->GetCantidadMazos(), g_Window );
 	g_IA = new IA( g_Nivel->GetCantidadMazos() );
 	g_Resultados = new Resultados( g_Window, g_Nivel, g_IA, g_Textos );
@@ -152,18 +158,9 @@ void Menu()
 		ClearScreen();
 
 		g_Textos->MostrarTexto("Codebreaker", ImpresionDeTexto::Pretendo90, WINDOW_WIDTH/2-338, 100, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
-
-		if( ( g_Nivel->GetNivelActual() > 1 || g_IA->CantidadIntentos() > 0 )  && ( g_IA->CantidadIntentos() < g_Nivel->GetMaximosIntentos() ) )
-		{
-			g_Textos->MostrarTexto("(C)ontinuar", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 250, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
-			g_Textos->MostrarTexto("Comenzar (N)uevo juego", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 300, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
-			g_Textos->MostrarTexto("(S)alir", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 350, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
-		}
-		else
-		{
-			g_Textos->MostrarTexto("(C)omenzar juego", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 250, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
-			g_Textos->MostrarTexto("(S)alir", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 300, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
-		}
+		g_Textos->MostrarTexto("(C)omenzar juego", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 250, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+		g_Textos->MostrarTexto("(S)alir", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 300, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+		g_Textos->MostrarTexto("2016 - asimon@gmail.com - jonatandb@gmail.com", ImpresionDeTexto::Pixelated20, WINDOW_WIDTH - 450, 728, g_Window, Colores::GrisOscuro_R, Colores::GrisOscuro_G, Colores::GrisOscuro_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
 		// Tell SDL to display our backbuffer. The four 0's will make SDL display the whole screen.
 		SDL_UpdateRect( g_Window, 0, 0, 0, 0 );
 
@@ -251,19 +248,27 @@ void WinLose()
 		// Make sure nothing from the last frame is still drawn.
 		ClearScreen();
 
-		if( g_IA->UsuarioGano() )
+		bool gano = g_IA->UsuarioGano();
+		bool ultimoNivel = g_Nivel->GetNivelActual() > 4;
+
+		if( gano )
 		{
-			g_Textos->MostrarTexto( "Ganaste!", ImpresionDeTexto::Pretendo90, WINDOW_WIDTH/2-338, 100, g_Window, 50, 255, 25, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
-			g_Textos->MostrarTexto( "(C)ontinuar", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 250, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
-			g_Textos->MostrarTexto( "(N)uevo juego", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 300, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
-			g_Textos->MostrarTexto( "(S)alir", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 350, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
+			if( ultimoNivel )
+			{
+				g_Textos->MostrarTexto( "Ganaste", ImpresionDeTexto::Pretendo90, WINDOW_WIDTH/2-338, 100, g_Window, 50, 255, 25, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
+			}
+			else
+			{
+				g_Textos->MostrarTexto( "Perfecto", ImpresionDeTexto::Pretendo90, WINDOW_WIDTH/2-338, 100, g_Window, 50, 255, 25, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
+			}
+			g_Textos->MostrarTexto( "(C)ontinuar", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 200, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 		}
 		else
 		{
-			g_Textos->MostrarTexto( "Perdiste!", ImpresionDeTexto::Pretendo90, WINDOW_WIDTH/2-338, 100, g_Window, 255, 25, 25, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
-			g_Textos->MostrarTexto( "(C)omenzar de nuevo", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 250, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
-			g_Textos->MostrarTexto( "(S)alir", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 300, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
+			g_Textos->MostrarTexto( "Perdiste", ImpresionDeTexto::Pretendo90, WINDOW_WIDTH/2-338, 100, g_Window, 255, 25, 25, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 		}
+		g_Textos->MostrarTexto( "(N)uevo juego", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 250, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
+		g_Textos->MostrarTexto( "(S)alir", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 300, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 
 		// Tell SDL to display our backbuffer. The four 0's will make SDL display the whole screen.
 		SDL_UpdateRect(g_Window, 0, 0, 0, 0);
@@ -294,11 +299,6 @@ void ClearScreen()
 // handles it for the game's menu screen.
 void HandleMenuInput()
 {
-	// Menu													Pila de estados:
-	//SDL_QUIT			Quita todos							nada
-	//SDLK_ESCAPE		Quita	Menu						Exit
-	//SDLK_s			Quita	Menu						Exit
-	//SDLK_c			Agrega	Game						Exit, Menu, Game
 	// Fill our event structure with event information.
 	if( SDL_PollEvent(&g_Event) )
 	{
@@ -326,8 +326,7 @@ void HandleMenuInput()
 				g_StateStack.pop();
 				return;
 			}
-			// Nuevo juego
-			if( g_Event.key.keysym.sym == SDLK_n )
+			if( g_Event.key.keysym.sym == SDLK_c )
 			{
 				delete g_Nivel;
 				g_Nivel = new Nivel();
@@ -339,26 +338,6 @@ void HandleMenuInput()
 				g_StateStack.push(temp);
 				return;
 			}
-			if( g_Event.key.keysym.sym == SDLK_c )
-			{
-				// Continuar
-				if( ( g_Nivel->GetNivelActual() > 1 || g_IA->CantidadIntentos() > 0 )
-				 && ( g_IA->CantidadIntentos() < g_Nivel->GetMaximosIntentos() ) )
-				{
-					StateStruct temp;
-					temp.StatePointer = Game;
-					g_StateStack.push(temp);
-					return;
-				}
-				else // Comenzar
-				{
-					InicializarGameObjects();
-					StateStruct temp;
-					temp.StatePointer = Game;
-					g_StateStack.push(temp);
-					return;
-				}
-			}
 		}
 	}
 }
@@ -367,16 +346,6 @@ void HandleMenuInput()
 // handles it for the main game state.
 void HandleGameInput()
 {
-	// Game													Pila de estados:
-	//SDL_QUIT		Quita todos								nada
-	//SDLK_ESCAPE	Quita Game								Exit, Menu
-	//Victoria		Quita Game, Quita Menu, Agrega WinLose	Exit, WinLose
-
-	//static bool derechaPresionada		= false;
-	//static bool izquerdaPresionada	= false;
-	//static bool arribaPresionada		= false;
-	//static bool abajoPresionada		= false;
-
 	// Fill our event structure with event information.
 	if( SDL_PollEvent( &g_Event) )
 	{
@@ -397,26 +366,22 @@ void HandleGameInput()
 			if( g_Event.key.keysym.sym == SDLK_ESCAPE )
 			{
 				g_StateStack.pop();
-				return; // this state is done, exit the function
+				return; 
 			}
 			if( g_Event.key.keysym.sym == SDLK_RIGHT || g_Event.key.keysym.sym == SDLK_TAB )
 			{
-				//derechaPresionada = true;
 				g_Tablero->FocoMazoDerecha();
 			}
-			if( g_Event.key.keysym.sym == SDLK_LEFT )
+			if( g_Event.key.keysym.sym == SDLK_LEFT || g_Event.key.keysym.sym == SDLK_BACKSPACE )
 			{
-				//izquerdaPresionada = true;
 				g_Tablero->FocoMazoIzquierda();
 			}
 			if( g_Event.key.keysym.sym == SDLK_UP )
 			{
-				//arribaPresionada = true;
 				g_Tablero->CartaSiguiente();	
 			}
 			if( g_Event.key.keysym.sym == SDLK_DOWN )
 			{
-				//abajoPresionada = true;
 				g_Tablero->CartaAnterior();
 			}
 			if( g_Event.key.keysym.sym >= SDLK_0 && g_Event.key.keysym.sym <= SDLK_9)
@@ -433,16 +398,13 @@ void HandleGameInput()
 			}
 
 			if( g_Event.key.keysym.sym == SDLK_RETURN || g_Event.key.keysym.sym == SDLK_KP_ENTER )
-			{
-				// Obtengo el número ingresado:
-				string numeroIngresado = g_Tablero->GetNumeroIngresadoString();
-
-				// Valido resultado, incremento intentos realizados, verifico si el usuario ganó:
+			{	
 				vector<char> resultado = g_IA->GetResultadoValidarIngreso( g_Resultados, g_Tablero->GetNumeroIngresadoVecInt() );
-				string resultadoString ( resultado.begin(), resultado.end() );
+				// To construct a std::string from a std::vector<char> ( http://stackoverflow.com/a/5115234 )
+				string resultadoString ( resultado.begin(), resultado.end() );		
 
 				// Agrego el número y su resultado a la lista de intentos/resultados:
-				g_Resultados->RegistrarIngreso( numeroIngresado, resultadoString );
+				g_Resultados->RegistrarIngreso( g_Tablero->GetNumeroIngresadoString(), resultadoString );
 
 				// Cambio de estado si el usuario ganó o perdió:
 				if( g_IA->UsuarioGano() || g_IA->CantidadIntentos() >= g_Nivel->GetMaximosIntentos() )
@@ -451,65 +413,20 @@ void HandleGameInput()
 					{
 						g_Nivel->SubirNivel();
 					}
-					g_StateStack.pop();	// Quito Game, quedan Exit y Menu
-					g_StateStack.pop();	// Quito Menu, queda Exit
 					StateStruct temp;
-					temp.StatePointer = WinLose;	// Agrego WinLose, quedan Exit y WinLose
+					temp.StatePointer = WinLose;
 					g_StateStack.push( temp );
 					return;
 				}
 			}
 		}
-
-		//if (g_Event.type == SDL_KEYUP)
-		//{
-		//	if (g_Event.key.keysym.sym == SDLK_RIGHT || g_Event.key.keysym.sym == SDLK_TAB )
-		//	{
-		//		derechaPresionada = false;
-		//	}
-		//	if (g_Event.key.keysym.sym == SDLK_LEFT)
-		//	{
-		//		izquerdaPresionada = false;
-		//	}
-		//	if( g_Event.key.keysym.sym == SDLK_UP )
-		//	{
-		//		arribaPresionada = false;
-		//	}
-		//	if( g_Event.key.keysym.sym == SDLK_DOWN )
-		//	{
-		//		abajoPresionada = false;
-		//	}
-		//}
 	}
-
-	//if( derechaPresionada )
-	//{
-	//	g_Tablero->FocoMazoDerecha();
-	//}
-	//if( izquerdaPresionada )
-	//{
-	//	g_Tablero->FocoMazoIzquierda();
-	//}
-	//if( arribaPresionada )
-	//{
-	//	g_Tablero->CartaSiguiente();
-	//}
-	//if( abajoPresionada )
-	//{
-	//	g_Tablero->CartaAnterior();
-	//}
 }
 
 // This function receives player input and
 // handles it for the game's exit screen.
 void HandleExitInput()
 {
-	// Exit													Pila de estados:
-	//SDL_QUIT		Quita todos								nada
-	//SDLK_ESCAPE	Quita Exit								nada
-	//SDLK_s		Quita Exit								nada
-	//SDLK_n		Agrega Menu								Exit, Menu
-
 	// Fill our event structure with event information.
 	if ( SDL_PollEvent(&g_Event) )
 	{
@@ -526,21 +443,18 @@ void HandleExitInput()
 
 		if( g_Event.type == SDL_KEYDOWN )
 		{
-			if( g_Event.key.keysym.sym == SDLK_ESCAPE )
+			if( g_Event.key.keysym.sym == SDLK_ESCAPE || g_Event.key.keysym.sym == SDLK_s )
 			{
-				g_StateStack.pop();
-				return;
-			}
-			if( g_Event.key.keysym.sym == SDLK_s )
-			{
-				g_StateStack.pop();
+				while (!g_StateStack.empty())
+				{
+					g_StateStack.pop();
+				}
 				return;
 			}
 			if( g_Event.key.keysym.sym == SDLK_n )
 			{
 				StateStruct temp;
-				temp.StatePointer = Menu;
-				g_StateStack.push(temp);
+				temp.StatePointer = Menu;	g_StateStack.push(temp);
 				return;
 			}
 		}
@@ -549,13 +463,6 @@ void HandleExitInput()
 
 void HandleWinLoseInput()
 {
-	// WinLose												Pila de estados:
-	//SDL_QUIT			Quita todos							nada
-	//SDLK_ESCAPE		Quita WinLose						Exit
-	//SDLK_s			Quita WinLose						Exit
-	//SDLK_c
-	//		Si ganó		Quita WinLose, Agrega Menu y Game	Exit, Menu, Game
-	//		Si perdió	Quita WinLose, Agrega Menu y Game
 	// Fill our event structure with event information.
 	if ( SDL_PollEvent(&g_Event) )
 	{
@@ -567,74 +474,57 @@ void HandleWinLoseInput()
 			{
 				g_StateStack.pop();
 			}
-			return; // game is over, exit the function
+			return;
 		}
 
 		// Handle keyboard input here
 		if( g_Event.type == SDL_KEYDOWN )
 		{
-			if( g_Event.key.keysym.sym == SDLK_ESCAPE )
-			{
-				g_StateStack.pop();
-				return; // this state is done, exit the function
-			}
-			// Quit
-			if( g_Event.key.keysym.sym == SDLK_s )
-			{
-				g_StateStack.pop();
-				return; // game is over, exit the function
-			}
+			bool continuar		= g_Event.key.keysym.sym == SDLK_c;
+			bool nuevoJuego		= g_Event.key.keysym.sym == SDLK_n;
+			bool salir			= g_Event.key.keysym.sym == SDLK_s;
+			bool gano			= g_IA->UsuarioGano();
+			bool ultimoNivel	= g_Nivel->GetNivelActual() > 4;
 
-			if( g_IA->UsuarioGano() )
+			if( continuar )
 			{
-				if( g_Event.key.keysym.sym == SDLK_c )	// Continuar
+				if( gano )
 				{
-					g_StateStack.pop();
-
-					InicializarGameObjects();
-
-					StateStruct temp;
-					temp.StatePointer = Menu;
-					g_StateStack.push(temp);
-
-					temp.StatePointer = Game;
-					g_StateStack.push(temp);
-					return;
+					if( ultimoNivel )
+					{
+						nuevoJuego = true;
+					}
+					else
+					{
+						InicializarGameObjects();	// Reseta todo excepto el nivel
+						g_StateStack.pop();			// Quito WinLose y sigo en Game
+						return;
+					}
 				}
-				if( g_Event.key.keysym.sym == SDLK_n )	// Nuevo juego
+				else
 				{
-					g_StateStack.pop();
-
-					delete g_Nivel;
-					g_Nivel = new Nivel();
-
-					InicializarGameObjects();
-
-					StateStruct temp;
-					temp.StatePointer = Menu;
-					g_StateStack.push(temp);
-
-					temp.StatePointer = Game;
-					g_StateStack.push(temp);
-					return;
+					nuevoJuego = true;
 				}
 			}
-			else
+
+			if( nuevoJuego )
 			{
-				if( g_Event.key.keysym.sym == SDLK_c )
+				delete g_Nivel;
+				g_Nivel = new Nivel();
+				InicializarGameObjects();	// Reseta todo excepto el nivel
+				g_StateStack.pop();			// Quito WinLose y sigo en Game
+				return;
+			}
+
+			if( salir )
+			{
+				while (!g_StateStack.empty())
 				{
 					g_StateStack.pop();
-
-					delete g_Nivel;
-					g_Nivel = new Nivel();
-
-					InicializarGameObjects();
-
-					StateStruct temp;
-					temp.StatePointer = Game;
-					g_StateStack.push(temp);
-					return;
 				}
+				StateStruct temp;
+				temp.StatePointer = Exit;	g_StateStack.push(temp);
+				return;
 			}
 		}
 	}
