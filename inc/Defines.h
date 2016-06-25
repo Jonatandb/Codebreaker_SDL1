@@ -11,7 +11,7 @@
 #define CARTA_H 275
 #define CARTAS_POR_MAZO 11			// La última (con indice 10) es la que tiene el signo de pregunta.
 
-#define DEBUG_INFO_HABILITADA 0		// Presionar la tecla secreta para ver la info ;-)
+#define DEBUG_INFO_HABILITADA 1		// Presionar la tecla secreta para ver la info ;-)
 
 #define LOG_FILE    "log.txt"
 #define PATH_IMAGES "assets/images/"

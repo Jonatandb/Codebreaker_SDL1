@@ -160,7 +160,7 @@ void Menu()
 		g_Textos->MostrarTexto("Codebreaker", ImpresionDeTexto::Pretendo90, WINDOW_WIDTH/2-338, 100, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
 		g_Textos->MostrarTexto("(C)omenzar juego", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 250, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
 		g_Textos->MostrarTexto("(S)alir", ImpresionDeTexto::Arial40, WINDOW_WIDTH/2-338, 300, g_Window, Colores::Blanco_R, Colores::Blanco_G, Colores::Blanco_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
-		g_Textos->MostrarTexto("2016 - asimon@gmail.com - jonatandb@gmail.com", ImpresionDeTexto::Pixelated20, WINDOW_WIDTH - 450, 728, g_Window, Colores::GrisOscuro_R, Colores::GrisOscuro_G, Colores::GrisOscuro_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
+		g_Textos->MostrarTexto("2016 - angelsimon@gmail.com - jonatandb@gmail.com - V.1", ImpresionDeTexto::Pixelated20, WINDOW_WIDTH - 530, 728, g_Window, Colores::GrisOscuro_R, Colores::GrisOscuro_G, Colores::GrisOscuro_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B);
 		// Tell SDL to display our backbuffer. The four 0's will make SDL display the whole screen.
 		SDL_UpdateRect( g_Window, 0, 0, 0, 0 );
 

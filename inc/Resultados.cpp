@@ -152,48 +152,48 @@ void Resultados::DibujarInfo()
 		if( _mostrarDebugInfo )
 		{
 
-			int y_debugInfo = 25;
+			int y_debugInfo = 725;
 
 			// Numero secreto:
-			pos.x = 235;
+			pos.x = WINDOW_WIDTH - 215;
 			pos.y = y_debugInfo;
 			string numeroSecreto = "Numero secreto: ";
 			numeroSecreto.append( _ia->GetNumeroSecretoString() );
-			_texto->MostrarTexto( numeroSecreto, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
+			_texto->MostrarTexto( numeroSecreto, ImpresionDeTexto::Pixelated20, pos, _window, Colores::GrisOscuro_R, Colores::GrisOscuro_G, Colores::GrisOscuro_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 
-			// Info de los vectores:
-			y_debugInfo += 25;
-			pos.y = y_debugInfo;
-			string ingresosSize = "_ingresos.size(): ";
-			int i = _ingresos.size();
-			std::ostringstream ingresosSizeString;
-			ingresosSizeString << i;
-			ingresosSize.append( ingresosSizeString.str() );
-			_texto->MostrarTexto( ingresosSize, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
+			//// Info de los vectores:
+			//y_debugInfo += 25;
+			//pos.y = y_debugInfo;
+			//string ingresosSize = "_ingresos.size(): ";
+			//int i = _ingresos.size();
+			//std::ostringstream ingresosSizeString;
+			//ingresosSizeString << i;
+			//ingresosSize.append( ingresosSizeString.str() );
+			//_texto->MostrarTexto( ingresosSize, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 
-			y_debugInfo += 25;
-			pos.y = y_debugInfo;
-			string resultadosSize = "_resultados.size(): ";
-			int j = _resultados.size();
-			std::ostringstream resultadosSizeString;
-			resultadosSizeString << j;
-			resultadosSize.append( resultadosSizeString.str() );
-			_texto->MostrarTexto( resultadosSize, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
+			//y_debugInfo += 25;
+			//pos.y = y_debugInfo;
+			//string resultadosSize = "_resultados.size(): ";
+			//int j = _resultados.size();
+			//std::ostringstream resultadosSizeString;
+			//resultadosSizeString << j;
+			//resultadosSize.append( resultadosSizeString.str() );
+			//_texto->MostrarTexto( resultadosSize, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 
-			// Mouse coords:
-			y_debugInfo += 25;
-			pos.y = y_debugInfo;
-			string mouse_x = "x = ";
-            std::ostringstream _mouse_xString;
-			_mouse_xString << _mouse_x;
-			mouse_x.append( _mouse_xString.str() );	//mouse_x.append( to_string( _mouse_x ) );	// No funciona en Codeblocks
-			_texto->MostrarTexto( mouse_x, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
-			pos.x = 325;
-			string mouse_y = "y = ";
-            std::ostringstream _mouse_yString;
-			_mouse_yString << _mouse_y;
-			mouse_y.append( _mouse_yString.str() );	//mouse_y.append( to_string( _mouse_y ) );	// No funciona en Codeblocks
-			_texto->MostrarTexto( mouse_y, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
+			//// Mouse coords:
+			//y_debugInfo += 25;
+			//pos.y = y_debugInfo;
+			//string mouse_x = "x = ";
+			//std::ostringstream _mouse_xString;
+			//_mouse_xString << _mouse_x;
+			//mouse_x.append( _mouse_xString.str() );	//mouse_x.append( to_string( _mouse_x ) );	// No funciona en Codeblocks
+			//_texto->MostrarTexto( mouse_x, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
+			//pos.x = 325;
+			//string mouse_y = "y = ";
+			//std::ostringstream _mouse_yString;
+			//_mouse_yString << _mouse_y;
+			//mouse_y.append( _mouse_yString.str() );	//mouse_y.append( to_string( _mouse_y ) );	// No funciona en Codeblocks
+			//_texto->MostrarTexto( mouse_y, ImpresionDeTexto::Pixelated20, pos, _window, Colores::Amarillo_R, Colores::Amarillo_G, Colores::Amarillo_B, Colores::Negro_R, Colores::Negro_G, Colores::Negro_B );
 
 			//if( ( SDL_GetTicks() - tiempoMostrandoDebugInfo ) > 5000 )
 			//{
@@ -344,7 +344,7 @@ void Resultados::HandleInput( SDL_Event* event)
 {
 	if( event->type == SDL_KEYDOWN )
 	{
-		if( event->key.keysym.sym == SDLK_j )
+		if( event->key.keysym.sym == SDLK_RALT )
 		{
 			_mostrarDebugInfo = !_mostrarDebugInfo;
 		}
