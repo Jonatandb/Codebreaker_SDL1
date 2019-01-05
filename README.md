@@ -1,8 +1,6 @@
 # Codebreaker
 
-https://github.com/Jonatandb/Codebreaker_SDL1.git
-
-
+![](preview.png?raw=true)
 
 Adivinar el código
 -------------------
